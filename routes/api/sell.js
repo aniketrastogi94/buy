@@ -13,7 +13,8 @@ const User=require('../../models/User');
 router.post('/',[auth,[
         check('text','Text is required').not().isEmpty(),
         check('category','Category is required').not().isEmpty(),
-        check('subject','Subject is required').not().isEmpty()
+        check('subject','Subject is required').not().isEmpty(),
+        check('image',"image is required").not().isEmpty()
     ]
 ],async (req,res)=>{
     const errors=validationResult(req);
