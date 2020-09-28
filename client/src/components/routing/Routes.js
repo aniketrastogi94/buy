@@ -8,7 +8,7 @@ import Alert from '../layout/Alert';
 // import AddExperience from '../profile-forms/AddExperience';
 import PrivateRoute from '../routing/PrivateRoute';
 // import Profile from '../profile/Profile';
-import Posts from '../posts/createPost'; 
+import Posts from '../posts/Posts'; 
 // import Post from '../Post/Post';
 // import AddEducation from '../profile-forms/AddEducation';
  import CreateProfile from '../profile-forms/CreateProfile';

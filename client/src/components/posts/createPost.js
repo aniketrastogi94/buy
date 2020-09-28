@@ -1,8 +1,10 @@
 import React,{ useState } from 'react';
-import axios from "axios";
 import { storage } from "../../firebase/firebase";
+import PropTypes from 'prop-types';
+import {addPost} from '../../actions/post';
+import {connect} from 'react-redux';
 
-const CreatePost= () =>{
+const CreatePost= ({addPost}) =>{
     const [Image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [formData,setFormData]=useState({
@@ -52,25 +54,7 @@ const CreatePost= () =>{
         const newPost={
             text,subject,category,image
         };
-        try {
-            const config={
-                headers:{
-                    'Content-Type':"application/json"
-                }
-            };
-            const body=JSON.stringify(newPost);
-            const res=await axios.post('/api/sell',body,config);
-        } catch (err) {
-            console.error(err.response.data);
-        }
-        const config={
-            headers:{
-                'Content-Type':"application/json"
-            }
-        };
-        console.log("formData",formData);
-        const res=await axios.post('/api/sell',formData,config);
-        console.log("res.data",res.data);
+        addPost(newPost);
         setImage(null);
         setProgress(0);
         setFormData({text:'',subject:'',category:'',text:''});
@@ -113,4 +97,8 @@ const CreatePost= () =>{
     );
 }
 
-export default CreatePost;
+CreatePost.propTypes={
+    addPost:PropTypes.func.isRequired,
+}
+
+export default connect(null,{addPost})(CreatePost);
