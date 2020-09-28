@@ -21,7 +21,7 @@ const CreatePost= () =>{
             setImage(e.target.files[0]);
         }
     }
-    const handleUpload =async () => {
+    const handleUpload =() => {
         const UploadTask = storage.ref(`images/${Image.name}`).put(Image);
         UploadTask.on(
             "state_changed",
@@ -44,36 +44,46 @@ const CreatePost= () =>{
                 setFormData({...formData,image:url})
             });
         }
+        
     );
-    const newPost={
-        text,subject,category,image
-    };
-    try {
+    console.log("Image uploaded");
+    }
+    const PostData=async()=>{
+        const newPost={
+            text,subject,category,image
+        };
+        try {
+            const config={
+                headers:{
+                    'Content-Type':"application/json"
+                }
+            };
+            const body=JSON.stringify(newPost);
+            const res=await axios.post('/api/sell',body,config);
+        } catch (err) {
+            console.error(err.response.data);
+        }
         const config={
             headers:{
                 'Content-Type':"application/json"
             }
         };
-        const body=JSON.stringify(newPost);
-        const res=await axios.post('/api/sell',body,config);
-        console.log(res.data);
-    } catch (err) {
-        console.error(err.response.data);
+        console.log("formData",formData);
+        const res=await axios.post('/api/sell',formData,config);
+        console.log("res.data",res.data);
+        setImage(null);
+        setProgress(0);
+        setFormData({text:'',subject:'',category:'',text:''});
     }
-    const config={
-        headers:{
-            'Content-Type':"application/json"
-        }
-    };
-    console.log(formData);
-    const res=await axios.post('/api/sell',formData,config);
-    console.log(res.data);
-  }
     return (
         <div>
             <h1>Its create post</h1>
             <input type="file"  onChange={handleChange} />
+            <br/>
             <progress value={progress} name="progress" max="100" />
+            <br/>
+            <button type="submit" onClick={handleUpload} >Upload pic</button>
+            <br/>
             <input
                 type="text"
                 placeholder="Enter text"
@@ -81,6 +91,7 @@ const CreatePost= () =>{
                 name="text"
                 value={text}
             />
+            <br/>
             <input
                 type="text"
                 placeholder="Enter subject"
@@ -88,6 +99,7 @@ const CreatePost= () =>{
                 name="subject"
                 value={subject}
             />
+            <br/>
             <input
                 type="text"
                 placeholder="Enter category"
@@ -95,7 +107,8 @@ const CreatePost= () =>{
                 name="category"
                 value={category}
             />
-            <button onClick={handleUpload}>Upload</button>
+            <br/>
+            <button type="submit" onClick={PostData} >Post your ad</button>
         </div>
     );
 }

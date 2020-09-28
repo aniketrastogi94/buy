@@ -8,7 +8,7 @@ import Alert from '../layout/Alert';
 // import AddExperience from '../profile-forms/AddExperience';
 import PrivateRoute from '../routing/PrivateRoute';
 // import Profile from '../profile/Profile';
-// import Posts from '../posts/Posts'; 
+import Posts from '../posts/createPost'; 
 // import Post from '../Post/Post';
 // import AddEducation from '../profile-forms/AddEducation';
  import CreateProfile from '../profile-forms/CreateProfile';
@@ -26,7 +26,8 @@ import PrivateRoute from '../routing/PrivateRoute';
           <Route exact path='/profile/:id' component={Profile}/> */}
           <PrivateRoute exact path='/dashboard' component={Dashboard}/> 
           <PrivateRoute exact path='/edit-profile' component={EditProfile} />
-          <PrivateRoute exact path='/create-profile' component={CreateProfile}/> 
+          <PrivateRoute exact path='/create-profile' component={CreateProfile}/>
+          <PrivateRoute exact path='/sell' component={Posts} /> 
          {/* <Route component={NotFound}/> */}
         </Switch>
       </section>
