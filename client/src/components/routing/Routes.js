@@ -9,9 +9,10 @@ import Alert from '../layout/Alert';
 import PrivateRoute from '../routing/PrivateRoute';
 // import Profile from '../profile/Profile';
 import Posts from '../posts/Posts'; 
-// import Post from '../Post/Post';
+import Post from '../post/Post';
 // import AddEducation from '../profile-forms/AddEducation';
  import CreateProfile from '../profile-forms/CreateProfile';
+import { POST_ERROR } from '../../actions/types';
 // import Profiles from '../profiles/Profiles';
 // import NotFound from '../layout/NotFound';
 
@@ -22,8 +23,8 @@ import Posts from '../posts/Posts';
         <Switch>
           <Route exact path="/register" component={Register}/>
           <Route exact path='/login' component={Login}/>
-          {/* <Route exact path='/profiles' component={Profiles}/>
-          <Route exact path='/profile/:id' component={Profile}/> */}
+          {/* <Route exact path='/profiles' component={Profiles}/>*/}
+          <Route exact path='/sell/:id' component={Post}/>
           <PrivateRoute exact path='/dashboard' component={Dashboard}/> 
           <PrivateRoute exact path='/edit-profile' component={EditProfile} />
           <PrivateRoute exact path='/create-profile' component={CreateProfile}/>
